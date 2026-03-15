@@ -1,8 +1,7 @@
 import subprocess
 import os
-from google.genai import types
 
-# Function to run a Python file with variable arguments as input
+
 def run_python_file(working_directory: str, file_path: str, args: list[str] | None = None):
     absolute_path = os.path.abspath(working_directory)
     target_dir = os.path.normpath(os.path.join(absolute_path, file_path))
@@ -20,7 +19,6 @@ def run_python_file(working_directory: str, file_path: str, args: list[str] | No
 
     if args:
         command.extend(args)
-
 
     try:
         result_object = subprocess.run(
@@ -49,25 +47,3 @@ def run_python_file(working_directory: str, file_path: str, args: list[str] | No
 
     except Exception as e:
         return f"Error: executing Python file: {e}"
-
-
-# Google GenAI schema
-schema_run_python_file = types.FunctionDeclaration(
-    name="run_python_file",
-    description="Executes a Python file using python3 interpreter. Accepts additional arguments to pass to the Python script as an array.",
-    parameters=types.Schema(
-        type=types.Type.OBJECT,
-        properties={
-            "file_path": types.Schema(
-                type=types.Type.STRING,
-                description="Path to the Python file to execute, relative to the working directory",
-            ),
-            "args": types.Schema(
-                type=types.Type.ARRAY,
-                items=types.Schema(type=types.Type.STRING),
-                description="Optional list of arguments to pass to the Python script",
-            ),
-        },
-        required=["file_path"],
-    ),
-)

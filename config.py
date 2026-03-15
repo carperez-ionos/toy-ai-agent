@@ -1,1 +1,8 @@
+# File reading
 MAX_CHARS = 10000
+
+# Agent defaults
+MAX_ITERATIONS = 20
+WORKING_DIRECTORY = "./calculator"
+DEFAULT_TEMPERATURE = 0.2
+MAX_CONTEXT_MESSAGES = 50
